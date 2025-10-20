@@ -7,26 +7,31 @@ export const routes = [
     element: <Home />,
   },
   {
-    name: "profile",
+    name: "보조금 찾기",
     path: "/profile",
     element: <Profile />,
   },
   {
-    name: "Sign In",
-    path: "/sign-in",
-    element: <SignIn />,
+    name: "충전소 찾기",
+    path: "/profile",
+    element: <Profile />,
   },
-  {
-    name: "Sign Up",
-    path: "/sign-up",
-    element: <SignUp />,
-  },
-  {
-    name: "Docs",
-    href: "https://www.material-tailwind.com/docs/react/installation",
-    target: "_blank",
-    element: "",
-  },
+  // {
+  //   name: "Sign In",
+  //   path: "/sign-in",
+  //   element: <SignIn />,
+  // },
+  // {
+  //   name: "Sign Up",
+  //   path: "/sign-up",
+  //   element: <SignUp />,
+  // },
+  // {
+  //   name: "Docs",
+  //   href: "https://www.material-tailwind.com/docs/react/installation",
+  //   target: "_blank",
+  //   element: "",
+  // },
 ];
 
 export default routes;

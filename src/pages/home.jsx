@@ -13,7 +13,7 @@ import {
 import { FingerPrintIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard, TeamCard } from "@/widgets/cards";
-import { featuresData, teamData, contactData } from "@/data";
+import { featuresData, teamData, contactData, chargeData } from "@/data";
 
 export function Home() {
   return (
@@ -29,13 +29,18 @@ export function Home() {
                 color="white"
                 className="mb-6 font-black"
               >
-                Your story starts with us.
+                Electric On Mobility
               </Typography>
               <Typography variant="lead" color="white" className="opacity-80">
-                This is a simple example of a Landing Page you can build using
-                Material Tailwind. It features multiple components based on the
-                Tailwind CSS and Material Design by Google.
+                {/* Electric + On = EON<br/> */}
+                전기차 구입부터 관리, 운행까지<br/>
+                전 과정을 웹 하나로, 켜는 순간 시작되는 EON 라이프
               </Typography>
+              {/* <img
+                src="/img/car_ioniq.avif"
+                alt="Electric On Mobility"
+                className="main-car"
+              /> */}
             </div>
           </div>
         </div>
@@ -65,42 +70,38 @@ export function Home() {
                 className="mb-3 font-bold"
                 color="blue-gray"
               >
-                Working with us is a pleasure
+                우리는 전기차 사용자들에게 지침서가 되고 싶습니다.
               </Typography>
               <Typography className="mb-8 font-normal text-blue-gray-500">
-                Don't let your uses guess by attaching tooltips and popoves to
-                any element. Just make sure you enable them first via
-                JavaScript.
+                전기차 보급률 증가에 따라 사용자들이 겪는 불편함은 정보의 분산에 있습니다.<br/>EON은 사용자들에게 전기차 구매, 관리, 운행에 필요한 정보를 한번에 제공하는 통합 플랫폼을 목표로 합니다.
                 <br />
                 <br />
-                The kit comes with three pre-built pages to help you get started
-                faster. You can change the text and images and you're good to
-                go. Just make sure you enable them first via JavaScript.
+                누구에게나 첫걸음은 낯설고 어렵습니다.
+                전기차를 처음 구매하려는 사람들에게는 친절한 길잡이가, 전기차를 보유한 사람들에게는 스마트한 관리비서가 되어주고 싶습니다. 전기차의 시작부터 관리까지, 언제나 곁에서 함께하는 든든한 동반 앱을 만들기 위해 이 서비스를 만들었습니다.
               </Typography>
-              <Button variant="filled">read more</Button>
+              {/* <Button variant="filled">read more</Button> */}
             </div>
             <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
               <Card className="shadow-lg border shadow-gray-500/10 rounded-lg">
                 <CardHeader floated={false} className="relative h-56">
                   <img
                     alt="Card Image"
-                    src="/img/teamwork.png"
+                    src="/img/ev2.jpg"
                     className="h-full w-full"
                   />
                 </CardHeader>
                 <CardBody>
-                  <Typography variant="small" color="blue-gray" className="font-normal">Enterprise</Typography>
+                  {/* <Typography variant="small" color="blue-gray" className="font-normal">Enterprise</Typography> */}
                   <Typography
                     variant="h5"
                     color="blue-gray"
                     className="mb-3 mt-2 font-bold"
                   >
-                    Top Notch Services
+                    About EON
                   </Typography>
                   <Typography className="font-normal text-blue-gray-500">
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens.
+                    전기차 구매,관리,운행에 필요한 정보를 앱 하나로 해결<br/>
+                    실시간 충전소 현황, 보조금 계산, 모델 비교 등 원스톱 서비스<br/>
                   </Typography>
                 </CardBody>
               </Card>
@@ -108,7 +109,7 @@ export function Home() {
           </div>
         </div>
       </section>
-      <section className="px-4 pt-20 pb-48">
+      {/* <section className="px-4 pt-20 pb-48">
         <div className="container mx-auto">
           <PageTitle section="Our Team" heading="Here are our heroes">
             According to the National Oceanic and Atmospheric Administration,
@@ -135,13 +136,12 @@ export function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
       <section className="relative bg-white py-24 px-4">
         <div className="container mx-auto">
-          <PageTitle section="Co-Working" heading="Build something">
-            Put the potentially record low maximum sea ice extent tihs year down
-            to low ice. According to the National Oceanic and Atmospheric
-            Administration, Ted, Scambos.
+          <PageTitle section="" heading="전기차 보조금 조회 및 비교">
+            경기도 성남시 기준으로 전기차 모델별 보조금 조회 및 비교<br/>
+            {/* 전기차 제조사, 시리즈명 선택 후 국비, 지방비 보조금 비교 확인 가능 */}
           </PageTitle>
           <div className="mx-auto mt-20 mb-48 grid max-w-5xl grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
             {contactData.map(({ title, icon, description }) => (
@@ -165,10 +165,38 @@ export function Home() {
               </Card>
             ))}
           </div>
-          <PageTitle section="Contact Us" heading="Want to work with us?">
-            Complete this form and we will get back to you in 24 hours.
+
+          <PageTitle section="" heading="전기차 충전소 위치 조회">
+            내 위치를 기준으로 전기차 충전소 검색<br/>
+            {/* 전기차 제조사, 시리즈명 선택 후 국비, 지방비 보조금 비교 확인 가능 */}
           </PageTitle>
-          <form className="mx-auto w-full mt-12 lg:w-5/12">
+          <div className="mx-auto mt-20 mb-48 grid max-w-5xl grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
+            {chargeData.map(({ title, icon, description }) => (
+              <Card
+                key={title}
+                color="transparent"
+                shadow={false}
+                className="text-center text-blue-gray-900"
+              >
+                <div className="mx-auto mb-6 grid h-14 w-14 place-items-center rounded-full bg-blue-gray-900 shadow-lg shadow-gray-500/20">
+                  {React.createElement(icon, {
+                    className: "w-5 h-5 text-white",
+                  })}
+                </div>
+                <Typography variant="h5" color="blue-gray" className="mb-2">
+                  {title}
+                </Typography>
+                <Typography className="font-normal text-blue-gray-500">
+                  {description}
+                </Typography>
+              </Card>
+            ))}
+          </div>
+
+          {/* <PageTitle section="Contact Us" heading="Want to work with us?">
+            Complete this form and we will get back to you in 24 hours.
+          </PageTitle> */}
+          {/* <form className="mx-auto w-full mt-12 lg:w-5/12">
             <div className="mb-8 flex gap-8">
               <Input variant="outlined" size="lg" label="Full Name" />
               <Input variant="outlined" size="lg" label="Email Address" />
@@ -195,7 +223,7 @@ export function Home() {
             <Button variant="gradient" size="lg" className="mt-8" fullWidth>
               Send Message
             </Button>
-          </form>
+          </form> */}
         </div>
       </section>
       <div className="bg-white">

@@ -64,18 +64,23 @@ export function Navbar({ brandName, routes, action }) {
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
         <Link to="/">
-          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
-            {brandName}
+          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold logo-container">
+            {/* {brandName} */}
+            <img 
+              src="/img/eon-logo.png" 
+              alt={brandName}
+              className="logo"
+            />
           </Typography>
         </Link>
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
           <a
-            href="https://www.material-tailwind.com/blocks?ref=mtkr"
+            href="https://github.com/orgs/Get-Your-Eon/repositories"
             target="_blank"
           >
             <Button variant="text" size="sm" color="white" fullWidth>
-              pro version
+              github
             </Button>
           </a>
           {React.cloneElement(action, {
@@ -103,12 +108,12 @@ export function Navbar({ brandName, routes, action }) {
         <div className="container mx-auto">
           {navList}
           <a
-            href="https://www.material-tailwind.com/blocks/react?ref=mtkr"
+            href="https://github.com/orgs/Get-Your-Eon/repositories"
             target="_blank"
             className="mb-2 block"
           >
             <Button variant="text" size="sm" fullWidth>
-              pro version
+              github
             </Button>
           </a>
           {React.cloneElement(action, {
@@ -121,14 +126,14 @@ export function Navbar({ brandName, routes, action }) {
 }
 
 Navbar.defaultProps = {
-  brandName: "Material Tailwind React",
+  brandName: "EON",
   action: (
     <a
-      href="https://www.creative-tim.com/product/material-tailwind-kit-react"
+      href=""
       target="_blank"
     >
       <Button variant="gradient" size="sm" fullWidth>
-        free download
+        QR CODE
       </Button>
     </a>
   ),

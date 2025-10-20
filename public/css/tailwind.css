@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* .logo-container {
+    display: flex;
+    align-items: center;
+  } */
+  .logo {
+    display: inline-block;
+    height: auto;
+    width: 120px;
+    cursor: pointer;
+  }
+  .p-3 {
+    /* border: 1px solid red; */
+  }
+  .main-car {
+    width: 2000px;
+  }
+}
