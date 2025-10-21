@@ -1,4 +1,4 @@
-import { Home, Profile, SignIn, SignUp } from "@/pages";
+import { Home, Profile, SignIn, SignUp, GetCharge } from "@/pages";
 
 export const routes = [
   {
@@ -13,8 +13,8 @@ export const routes = [
   },
   {
     name: "충전소 찾기",
-    path: "/profile",
-    element: <Profile />,
+    path: "/charge",
+    element: <GetCharge />,
   },
   // {
   //   name: "Sign In",
