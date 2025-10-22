@@ -1,4 +1,4 @@
-import { Home, Profile, SignIn, SignUp, GetCharge } from "@/pages";
+import { Home, Subsidy, GetCharge } from "@/pages";
 
 export const routes = [
   {
@@ -8,30 +8,14 @@ export const routes = [
   },
   {
     name: "보조금 찾기",
-    path: "/profile",
-    element: <Profile />,
+    path: "/subsidy",
+    element: <Subsidy />,
   },
   {
     name: "충전소 찾기",
     path: "/charge",
     element: <GetCharge />,
   },
-  // {
-  //   name: "Sign In",
-  //   path: "/sign-in",
-  //   element: <SignIn />,
-  // },
-  // {
-  //   name: "Sign Up",
-  //   path: "/sign-up",
-  //   element: <SignUp />,
-  // },
-  // {
-  //   name: "Docs",
-  //   href: "https://www.material-tailwind.com/docs/react/installation",
-  //   target: "_blank",
-  //   element: "",
-  // },
 ];
 
 export default routes;
