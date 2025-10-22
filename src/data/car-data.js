@@ -1,6 +1,3 @@
-import defaultCarImage from '../assets/car_ioniq.avif'
-import default2CarImage from '../assets/car_casper.avif'
-
 export const manufacturers = [
   {
     id: '현대자동차',
@@ -109,9 +106,15 @@ export const getModelsByManufacturer = (manufacturerId) => {
   return manufacturer ? manufacturer.models : [];
 };
 
+// export const modelImageMap = {
+//   GV60: defaultCarImage,
+//   GV70: default2CarImage,
+// };
+
 export const modelImageMap = {
-  GV60: defaultCarImage,
-  GV70: default2CarImage,
+  GV60: '/img/cars/gv60.jpg',
+  GV70: '/img/cars/gv70.jpg',
+  // ... 다른 모델들
 };
 
 export const getImageByModel = (modelId) => {
