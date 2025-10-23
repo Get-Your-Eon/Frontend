@@ -126,10 +126,9 @@ export function Subsidy() {
         </div>
       </section> */}
 
-            <section className="relative bg-white py-16">
+      <section className="relative bg-white py-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
-            {/* 검색 폼 박스 */}
             <div className="lg:w-1/3">
               <div className="bg-white rounded-xl shadow-xl p-8 border border-blue-gray-50">
                 <h2 className="text-2xl font-bold text-blue-gray-700 mb-8 text-center">

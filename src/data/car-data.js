@@ -112,8 +112,8 @@ export const getModelsByManufacturer = (manufacturerId) => {
 // };
 
 export const modelImageMap = {
-  GV60: '/img/cars/gv60.jpg',
-  GV70: '/img/cars/gv70.jpg',
+  GV60: '/img/cars/car_casper.avif',
+  GV70: '/img/cars/car_ioniq.avif',
   // ... 다른 모델들
 };
 
