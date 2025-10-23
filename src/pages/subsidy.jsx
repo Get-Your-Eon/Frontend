@@ -1,13 +1,8 @@
-import { Avatar, Typography, Button } from "@material-tailwind/react";
-import {
-  MapPinIcon,
-  BriefcaseIcon,
-  BuildingLibraryIcon,
-} from "@heroicons/react/24/solid";
 import React, { useState } from 'react';
 import carImage from '/img/cars/car_ioniq.avif';
 import { getModelsByManufacturer, getImageByModel } from '@/data/car-data';
 import { Footer } from "@/widgets/layout";
+import { fetchSubsidy } from '@/api/subsidy';
 
 export function Subsidy() {
   const [selectedManufacturer, setSelectedManufacturer] = useState('');
