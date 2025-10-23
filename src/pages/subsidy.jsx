@@ -34,6 +34,8 @@ export function Subsidy() {
       
       setSubsidyResults(Array.isArray(data) ? data : [data]);
       // // 선택 모델에 해당하는 이미지로 변경
+      const newImageSrc = getImageByModel(selectedModel);
+      setCarImageSrc(newImageSrc);
       // setCarImageSrc(getImageByModel(selectedModel));
       
     } catch (error) {
