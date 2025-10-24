@@ -7,6 +7,8 @@ import { fetchSubsidy } from '@/api/apis';
 export function Subsidy() {
   const [selectedManufacturer, setSelectedManufacturer] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
+  const [selectedSido, setSelectedSido] = useState('');
+  const [selectedSigungu, setSelectedSigungu] = useState('');
   const [carImageSrc, setCarImageSrc] = useState(carImage);
 
   const [subsidyResults, setSubsidyResults] = useState([]);
@@ -22,9 +24,18 @@ export function Subsidy() {
     setSelectedModel(e.target.value);
   };
 
+  const handleSidoChange = (e) => {
+    setSelectedSido(e.target.value);
+    setSelectedSigungu(''); // 시/군/구 초기화
+  };
+
+  const handleSigunguChange = (e) => {
+    setSelectedSigungu(e.target.value);
+  };
+
   const handleSearch = async () => {
-    if (!selectedManufacturer || !selectedModel) {
-      alert('제조사와 모델 모두 선택해주세요.');
+    if (!selectedSido || !selectedSigungu || !selectedManufacturer || !selectedModel) {
+      alert('시/도, 시/군/구, 제조사, 모델을 모두 선택해주세요.');
       return;
     }
 
@@ -33,10 +44,9 @@ export function Subsidy() {
       console.log('검색 결과:', data);
       
       setSubsidyResults(Array.isArray(data) ? data : [data]);
-      // // 선택 모델에 해당하는 이미지로 변경
+      // 선택 모델에 해당하는 이미지로 변경
       const newImageSrc = getImageByModel(selectedModel);
       setCarImageSrc(newImageSrc);
-      // setCarImageSrc(getImageByModel(selectedModel));
       
     } catch (error) {
       alert('보조금 정보를 가져오는 중 오류가 발생했습니다.');
@@ -140,18 +150,25 @@ export function Subsidy() {
                 <div className="space-y-4">
                   <select 
                     className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
-                    defaultValue="default"
+                    value={selectedSido}
+                    onChange={handleSidoChange}
                   >
-                    <option value="default" disabled>시/도 선택</option>
-                    <option value="">경기도</option>
+                    <option value="" disabled>시/도 선택</option>
+                    <option value="경기도">경기도</option>
                   </select>
 
                   <select 
                     className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
                     defaultValue="default"
+                    value={selectedSigungu}
+                    onChange={handleSigunguChange}
+                    // disabled={!selectedSido}
                   >
-                    <option value="default" disabled>시/군/구 선택</option>
-                    <option value="">성남시</option>
+                    <option value="" disabled>
+                      시/군/구 선택
+                      {/* {!selectedSido ? "시/도를 먼저 선택해주세요" : "시/군/구 선택"} */}
+                    </option>
+                    <option value="성남시">성남시</option>
                   </select>
 
                   <select 
