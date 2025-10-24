@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import carImage from '/img/cars/car_ioniq.avif';
+import carImage from '/img/cars/gv60.png';
 import { getModelsByManufacturer, getImageByModel } from '@/data/car-data';
 import { Footer } from "@/widgets/layout";
 import { fetchSubsidy } from '@/api/apis';
