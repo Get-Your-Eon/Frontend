@@ -127,14 +127,14 @@ export const modelImageMap = {
 
   scenic: '/img/cars/scenic.webp',
 
-  MINI: '/img/cars/mini.png',
+  MINI: '/img/cars/mini.webp',
   i4: '/img/cars/i4.png',
   iX1: '/img/cars/ix1.png',
   iX2: '/img/cars/ix2.png',
   i5: '/img/cars/i5.png',
 
   'Model 3': '/img/cars/model3.png',
-  'Model Y': '/img/cars/modely.png',
+  'Model Y': '/img/cars/modelY.png',
 
   EQB: '/img/cars/eqb.png',
   EQA: '/img/cars/eqa.png',
