@@ -4,16 +4,11 @@ import {
   CardBody,
   CardHeader,
   Typography,
-  Button,
-  IconButton,
-  Input,
-  Textarea,
-  Checkbox,
 } from "@material-tailwind/react";
-import { FingerPrintIcon, UsersIcon } from "@heroicons/react/24/solid";
+import { FingerPrintIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
-import { FeatureCard, TeamCard } from "@/widgets/cards";
-import { featuresData, teamData, contactData, chargeData } from "@/data";
+import { FeatureCard } from "@/widgets/cards";
+import { featuresData, contactData, chargeData } from "@/data";
 
 export function Home() {
   return (
@@ -32,15 +27,9 @@ export function Home() {
                 Electric On Mobility
               </Typography>
               <Typography variant="lead" color="white" className="opacity-80">
-                {/* Electric + On = EON<br/> */}
                 전기차 구입부터 관리, 운행까지<br/>
                 전 과정을 웹 하나로, 켜는 순간 시작되는 EON 라이프
               </Typography>
-              {/* <img
-                src="/img/car_ioniq.avif"
-                alt="Electric On Mobility"
-                className="main-car"
-              /> */}
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ export function GetCharge() {
 
   return (
     <>
-      <section className="relative block h-[13vh]">
+      <section className="relative block h-[20vh]">
         <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center scale-105" />
         <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
       </section>
@@ -62,9 +62,9 @@ export function GetCharge() {
         >
           {!state.isLoading && (
           <MapMarker position={state.center}>
-            {/* <div style={{ padding: "5px", color: "#000" }}>
+            <div style={{ padding: "5px", color: "#000" }}>
               {state.errMsg ? state.errMsg : "여기에 계신가요?!"}
-            </div> */}
+            </div>
           </MapMarker>
         )}
         </Map>

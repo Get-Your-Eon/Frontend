@@ -15,3 +15,15 @@ export const fetchSubsidy = async (manufacturer, modelGroup) => {
   
   return await response.json();
 };
+
+export const fetchChargeStations = async (lat, lng, radius) => {
+  const response = await fetch(`${API_BASE_URL}/api/v1/stations?lat=${lat}&lng=${lng}&radius=${radius}`, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': API_KEY,
+      'Accept': 'application/json'
+    }
+  });
+
+  return await response.json();
+};
