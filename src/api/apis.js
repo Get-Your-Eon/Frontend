@@ -17,7 +17,10 @@ export const fetchSubsidy = async (manufacturer, modelGroup) => {
 };
 
 export const fetchChargeStations = async (lat, lng, radius) => {
-  const response = await fetch(`${API_BASE_URL}/api/v1/stations?lat=${lat}&lng=${lng}&radius=${radius}`, {
+  const encodedLat = encodeURIComponent(lat);
+  const encodedLng = encodeURIComponent(lng);
+
+  const response = await fetch(`${API_BASE_URL}/api/v1/stations?lat=${encodedLat}&lng=${encodedLng}&radius=${radius}`, {
     method: 'GET',
     headers: {
       'X-API-KEY': API_KEY,
@@ -27,3 +30,5 @@ export const fetchChargeStations = async (lat, lng, radius) => {
 
   return await response.json();
 };
+
+// string 은 인코딩해서 보내기.
