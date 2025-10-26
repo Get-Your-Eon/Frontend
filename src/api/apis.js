@@ -16,11 +16,11 @@ export const fetchSubsidy = async (manufacturer, modelGroup) => {
   return await response.json();
 };
 
-export const fetchChargeStations = async (lat, lng, radius) => {
+export const fetchChargeStations = async (lat, lon, radius) => {
   const encodedLat = encodeURIComponent(lat);
-  const encodedLng = encodeURIComponent(lng);
+  const encodedLon = encodeURIComponent(lon);
 
-  const response = await fetch(`${API_BASE_URL}/api/v1/stations?lat=${encodedLat}&lng=${encodedLng}&radius=${radius}`, {
+  const response = await fetch(`${API_BASE_URL}/api/v1/stations?lat=${encodedLat}&lon=${encodedLon}&radius=${radius}`, {
     method: 'GET',
     headers: {
       'X-API-KEY': API_KEY,

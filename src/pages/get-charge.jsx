@@ -1,6 +1,7 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk"
 import { Footer } from "@/widgets/layout";
 import { useEffect, useState } from "react";
+import { fetchChargeStations } from "@/api/apis";
 
 export function GetCharge() {
 
@@ -13,18 +14,32 @@ export function GetCharge() {
     isLoading: true,
   });
 
+  const [chargeStations, setChargeStations] = useState([]);
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          
           setState((prev) => ({
             ...prev,
             center: { 
-              lat: position.coords.latitude, // 위도
-              lng: position.coords.longitude, // 경도 
+              lat: lat,
+              lng: lng,
             },
             isLoading: false,
           }));
+
+          // 충전소 데이터 가져오기
+          try {
+            const stationsData = await fetchChargeStations(lat, lng, 5000);
+            console.log('충전소 데이터:', stationsData); 
+            setChargeStations(stationsData);
+          } catch (error) {
+            console.error("충전소 데이터를 가져오는데 실패했습니다:", error);
+          }
         },
         (err) => {
           setState((prev) => ({
@@ -60,13 +75,36 @@ export function GetCharge() {
           }}
           level={3} // 지도의 확대 레벨
         >
+          {/* 현재 위치 마커 */}
           {!state.isLoading && (
-          <MapMarker position={state.center}>
-            <div style={{ padding: "5px", color: "#000" }}>
-              {state.errMsg ? state.errMsg : "현재 위치!"}
-            </div>
-          </MapMarker>
-        )}
+            <MapMarker position={state.center}>
+              <div style={{ padding: "5px", color: "#000", backgroundColor: "#fff", borderRadius: "5px" }}>
+                {state.errMsg ? state.errMsg : "현재 위치!"}
+              </div>
+            </MapMarker>
+          )}
+          
+          {/* 충전소 마커들 */}
+          {Array.isArray(chargeStations) && chargeStations.map((station, index) => (
+            <MapMarker 
+              key={station.station_id || index}
+              position={{ 
+                lat: parseFloat(station.lat), 
+                lng: parseFloat(station.lon) // lon을 lng로 매핑
+              }}
+            >
+              <div style={{ 
+                padding: "5px", 
+                color: "#000", 
+                backgroundColor: "#e3f2fd", 
+                borderRadius: "5px",
+                fontSize: "12px",
+                whiteSpace: "nowrap"
+              }}>
+                {station.station.name || "충전소"}
+              </div>
+            </MapMarker>
+          ))}
         </Map>
       </section>
 
