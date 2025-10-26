@@ -63,7 +63,7 @@ export function GetCharge() {
           {!state.isLoading && (
           <MapMarker position={state.center}>
             <div style={{ padding: "5px", color: "#000" }}>
-              {state.errMsg ? state.errMsg : "여기에 계신가요?!"}
+              {state.errMsg ? state.errMsg : "현위치"}
             </div>
           </MapMarker>
         )}
