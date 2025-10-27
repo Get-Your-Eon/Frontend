@@ -124,6 +124,34 @@ material-tailwind-kit-react
     ├── README.md
     ├── tailwind.config.cjs
     └── vite.config.js
+
+
+get-your-eon/
+├── 📁 public/
+│   └── 📄 index.html
+├── 📁 src/
+│   ├── 📁 components/
+│   │   ├── 📁 ui/
+│   │   │   └── 📄 index.ts
+│   │   └── 📄 index.ts
+│   ├── 📁 pages/
+│   │   └── 📄 index.ts
+│   ├── 📁 hooks/
+│   │   └── 📄 index.ts
+│   ├── 📁 utils/
+│   │   └── 📄 index.ts
+│   ├── 📁 styles/
+│   │   └── 📄 index.css
+│   ├── 📁 types/
+│   │   └── 📄 index.ts
+│   ├── 📄 App.tsx
+│   ├── 📄 main.tsx
+│   └── 📄 vite-env.d.ts
+├── 📄 package.json
+├── 📄 tsconfig.json
+├── 📄 vite.config.js ✅ (현재 파일)
+├── 📄 README.md
+└── 📄 .gitignore
 ```
 
 ## Browser Support
