@@ -73,13 +73,13 @@ export function Navbar({ brandName, routes, action }) {
             />
           </Typography>
         </Link>
-        <div className="hidden lg:block">{navList}</div>
+        <div className="hidden lg:block" style={{ color: '#000' }}>{navList}</div>
         <div className="hidden gap-2 lg:flex">
           <a
             href="https://github.com/orgs/Get-Your-Eon/repositories"
             target="_blank"
           >
-            <Button variant="text" size="sm" color="white" fullWidth>
+            <Button variant="text" size="sm" color="black" fullWidth>
               github
             </Button>
           </a>

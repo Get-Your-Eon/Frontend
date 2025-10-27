@@ -14,19 +14,19 @@ export function Home() {
   return (
     <>
       <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
-        <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
-        <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
+        <div className="absolute top-0 h-full w-full bg-cover bg-center" />
+        <div className="absolute top-0 h-full w-full bg-cover bg-center" style={{backgroundColor: '#D5DBE0'}}/>
         <div className="max-w-8xl container relative mx-auto">
           <div className="flex flex-wrap items-center">
             <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
               <Typography
                 variant="h1"
-                color="white"
+                color="black"
                 className="mb-6 font-black"
               >
                 Electric On Mobility
               </Typography>
-              <Typography variant="lead" color="white" className="opacity-80">
+              <Typography variant="lead" color="black" className="opacity-80">
                 전기차 구입부터 관리, 운행까지<br/>
                 전 과정을 웹 하나로, 켜는 순간 시작되는 EON 라이프
               </Typography>
