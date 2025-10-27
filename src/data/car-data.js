@@ -1,4 +1,4 @@
-const defaultCarImage = '/img/cars/gv60.png';
+// const defaultCarImage = '/img/cars/gv60.png';
 
 export const manufacturers = [
   {
@@ -125,9 +125,9 @@ export const modelImageMap = {
   PV5: '/img/cars/pv5.png',
   EV5: '/img/cars/ev5.png',
 
-  scenic: '/img/cars/scenic.webp',
+  scenic: '/img/cars/scenic.png',
 
-  MINI: '/img/cars/mini.webp',
+  MINI: '/img/cars/mini.png',
   i4: '/img/cars/i4.png',
   iX1: '/img/cars/ix1.png',
   iX2: '/img/cars/ix2.png',
@@ -156,5 +156,5 @@ export const modelImageMap = {
 };
 
 export const getImageByModel = (modelId) => {
-  return modelImageMap[modelId] ?? defaultCarImage;
+  return modelImageMap[modelId];
 };
