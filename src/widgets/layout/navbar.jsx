@@ -79,7 +79,7 @@ export function Navbar({ brandName, routes, action }) {
             href="https://github.com/orgs/Get-Your-Eon/repositories"
             target="_blank"
           >
-            <Button variant="text" size="sm" color="black" fullWidth>
+            <Button variant="text" size="sm" fullWidth style={{ color: '#000' }}>
               github
             </Button>
           </a>
