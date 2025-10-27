@@ -56,7 +56,7 @@ export function GetCharge() {
                     lat: station.lat,
                     lng: station.lon,
                   },
-                  content: station.statNm || "충전소",
+                  content: station.addr + "" + station.station_name,
                   isCurrentLocation: false,
                 });
               });

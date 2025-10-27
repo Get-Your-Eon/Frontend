@@ -84,7 +84,6 @@ export function Subsidy() {
 
                   <select 
                     className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
-                    defaultValue="default"
                     value={selectedSigungu}
                     onChange={handleSigunguChange}
                     // disabled={!selectedSido}
