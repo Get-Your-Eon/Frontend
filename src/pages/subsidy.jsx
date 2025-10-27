@@ -164,7 +164,7 @@ export function Subsidy() {
                             <img 
                               src={carImageSrc} 
                               alt="자동차모델이미지" 
-                              className="w-48 h-32 object-cover rounded-lg shadow-md"
+                              className="w-50 h-37 object-contain rounded-lg shadow-md"
                             />
                           </div>
                           <div className="flex-1 text-center md:text-left">

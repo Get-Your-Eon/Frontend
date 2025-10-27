@@ -93,6 +93,7 @@ export function Navbar({ brandName, routes, action }) {
           color="white"
           className="ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
           onClick={() => setOpenNav(!openNav)}
+          style={{ color: '#000' }}
         >
           {openNav ? (
             <XMarkIcon strokeWidth={2} className="h-6 w-6" />
