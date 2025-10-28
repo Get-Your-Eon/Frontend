@@ -16,15 +16,72 @@ export function GetCharge() {
   const [markers, setMarkers] = useState([]);
   const [info, setInfo] = useState();
   const [map, setMap] = useState();
+  const [currentLocation, setCurrentLocation] = useState(null);
 
-  // 현재 위치와 충전소 데이터 가져오기
+  // 지도크기에 따라 radius 값 바꿔주기
+  const getRadiusFromLevel = (level) => {
+    if (level <= 3) return 500;
+    if (level <= 5) return 1000;
+    if (level <= 7) return 2000;
+    if (level <= 9) return 3000;
+    if (level <= 11) return 4000;
+    if (level <= 13) return 5000;
+    return 10000;
+  };
+
+  // 충전소 데이터 가져오기
+  const loadChargeStations = async (centerLat, centerLng, radius, userLat, userLng) => {
+    try {
+      const stationsData = await fetchChargeStations(centerLat, centerLng, radius);
+      console.log('충전소 데이터:', stationsData, 'radius:', radius);
+      
+      // 현재 위치 마커
+      const newMarkers = [
+        {
+          position: { lat: userLat, lng: userLng },
+          content: "현재 위치",
+          isCurrentLocation: true,
+        }
+      ];
+
+      // 충전소 마커
+      if (stationsData.stations && stationsData.stations.length > 0) {
+        stationsData.stations.forEach((station) => {
+          newMarkers.push({
+            position: {
+              lat: station.lat,
+              lng: station.lon,
+            },
+            content: station.addr + " " + station.station_name,
+            isCurrentLocation: false,
+          });
+        });
+      }
+
+      console.log('마커 개수:', newMarkers.length);
+      setMarkers(newMarkers);
+    } catch (error) {
+      console.error("충전소 데이터를 가져오는데 실패했습니다:", error);
+      // 에러가 나도 현재 위치 마커는 표시
+      setMarkers([
+        {
+          position: { lat: userLat, lng: userLng },
+          content: "현재 위치",
+          isCurrentLocation: true,
+        }
+      ]);
+    }
+  };
+
+  // 현재 위치 가져오기
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        async (position) => {
+        (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           
+          setCurrentLocation({ lat, lng });
           setState((prev) => ({
             ...prev,
             center: { 
@@ -34,38 +91,14 @@ export function GetCharge() {
             isLoading: false,
           }));
 
-          // 충전소 데이터 가져오기
-          try {
-            const stationsData = await fetchChargeStations(lat, lng, 2000);
-            console.log('충전소 데이터:', stationsData);
-            
-            if (stationsData.stations && stationsData.stations.length > 0) {
-              // 현재 위치 마커 추가
-              const newMarkers = [
-                {
-                  position: { lat, lng },
-                  content: "현재 위치",
-                  isCurrentLocation: true,
-                }
-              ];
-
-              // 충전소 마커들 추가
-              stationsData.stations.forEach((station) => {
-                newMarkers.push({
-                  position: {
-                    lat: station.lat,
-                    lng: station.lon,
-                  },
-                  content: station.addr + "" + station.station_name,
-                  isCurrentLocation: false,
-                });
-              });
-
-              setMarkers(newMarkers);
+          // 현재 위치 마커 즉시 표시
+          setMarkers([
+            {
+              position: { lat, lng },
+              content: "현재 위치",
+              isCurrentLocation: true,
             }
-          } catch (error) {
-            console.error("충전소 데이터를 가져오는데 실패했습니다:", error);
-          }
+          ]);
         },
         (err) => {
           setState((prev) => ({
@@ -82,18 +115,45 @@ export function GetCharge() {
         isLoading: false,
       }));
     }
-  }, []); // 빈 배열로 한 번만 실행
+  }, []);
 
-  // 지도 범위 설정 (마커가 변경될 때)
+  // 지도가 준비되고 현재 위치를 알 때 초기 충전소 데이터 불러오기
   useEffect(() => {
-    if (!map || markers.length === 0) return;
+    if (map && currentLocation) {
+      loadChargeStations(
+        currentLocation.lat, 
+        currentLocation.lng, 
+        2000,
+        currentLocation.lat,
+        currentLocation.lng
+      );
+    }
+  }, [map, currentLocation]);
 
-    const bounds = new kakao.maps.LatLngBounds();
-    markers.forEach((marker) => {
-      bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng));
-    });
-    map.setBounds(bounds);
-  }, [map, markers]); // map과 markers가 모두 준비되면 실행
+  // 줌 레벨 변경 감지
+  useEffect(() => {
+    if (!map || !currentLocation) return;
+
+    const handleZoomChanged = () => {
+      const level = map.getLevel();
+      const center = map.getCenter();
+      const radius = getRadiusFromLevel(level);
+      
+      loadChargeStations(
+        center.getLat(), 
+        center.getLng(), 
+        radius,
+        currentLocation.lat,
+        currentLocation.lng
+      );
+    };
+
+    kakao.maps.event.addListener(map, 'zoom_changed', handleZoomChanged);
+
+    return () => {
+      kakao.maps.event.removeListener(map, 'zoom_changed', handleZoomChanged);
+    };
+  }, [map, currentLocation]);
 
   return (
     <>
@@ -110,12 +170,12 @@ export function GetCharge() {
             width: "100%",
             height: "700px",
           }}
-          level={3}
+          level={7}
           onCreate={setMap}
         >
-          {markers.map((marker) => (
+          {markers.map((marker, index) => (
             <MapMarker
-              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+              key={`marker-${index}-${marker.position.lat},${marker.position.lng}`}
               position={marker.position}
               onClick={() => setInfo(marker)}
               image={
@@ -124,7 +184,10 @@ export function GetCharge() {
                       src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
                       size: { width: 24, height: 35 },
                     }
-                  : undefined
+                  : {
+                    src: "/img/eon.png",
+                    size: { width: 40, height: 40 },
+                  }
               }
             >
               {info && info.content === marker.content && (

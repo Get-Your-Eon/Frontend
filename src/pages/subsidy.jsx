@@ -86,11 +86,9 @@ export function Subsidy() {
                     className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
                     value={selectedSigungu}
                     onChange={handleSigunguChange}
-                    // disabled={!selectedSido}
                   >
                     <option value="" disabled>
                       시/군/구 선택
-                      {/* {!selectedSido ? "시/도를 먼저 선택해주세요" : "시/군/구 선택"} */}
                     </option>
                     <option value="성남시">성남시</option>
                   </select>
@@ -141,7 +139,7 @@ export function Subsidy() {
               </div>
             </div>
 
-            {/* 결과 박스 */}
+            {/* 보조금 조회 결과 */}
             <div className="lg:w-2/3">
               <div className="bg-white rounded-xl shadow-xl p-8 border border-blue-gray-50 min-h-[400px]">
                 {subsidyResults.length === 0 ? (
