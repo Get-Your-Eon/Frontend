@@ -2,16 +2,16 @@
 
 **소개**
 
-EON은 전기차 사용자에게 구매·관리·운행 정보를 통합 제공하는 웹 프로젝트입니다.
+EON은 전기차 사용자에게 구매·관리·운행 정보를 통합 제공하는 웹 프로젝트입니다.  
 프론트엔드는 React + TypeScript + Vite로 구성되어 있습니다.
 
 **주요기능**
 
-차량별 보조금 검색 및 비교
-지역별 보조금(국비, 지방비) 정보 필터링
-유저 위치기반을 기준으로 가까운 전기차 충전소 검색
-전기차 충전소 운영정보, 충전타입 등의 정보 제공
-실시간 API 연동하여 최신 데이터 제공
+차량별 보조금 검색 및 비교  
+지역별 보조금(국비, 지방비) 정보 필터링  
+유저 위치기반을 기준으로 가까운 전기차 충전소 검색  
+전기차 충전소 운영정보, 충전타입 등의 정보 제공  
+실시간 API 연동하여 최신 데이터 제공  
 VIte 기반 빠른 빌드
 
 **개발환경설정**
@@ -36,10 +36,10 @@ npm run dev
 
 **기술스택**
 
-[ Frontend Framework ] - React
-[ Language ] - Javascript
-[ Bundler ] - Vite
-[ Deploy ] - Vercel
+[ Frontend Framework ] - React  
+[ Language ] - Javascript  
+[ Bundler ] - Vite  
+[ Deploy ] - Vercel  
 
 **폴더구조**
 
@@ -75,9 +75,3 @@ get-your-eon
 **배포정보**
 
 :rocket: https://get-your-eon.vercel.app
-
-## Browser Support
-
-At present, we officially aim to support the last two versions of the following browsers:
-
-<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
