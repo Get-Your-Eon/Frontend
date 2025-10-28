@@ -1,4 +1,4 @@
-import { Map, MapMarker } from "react-kakao-maps-sdk"
+import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk"
 import { Footer } from "@/widgets/layout";
 import { useEffect, useState } from "react";
 import { fetchChargeStations } from "@/api/apis";
@@ -52,7 +52,9 @@ export function GetCharge() {
               lat: station.lat,
               lng: station.lon,
             },
-            content: station.addr + " " + station.station_name,
+            content: station.addr + "\n" + station.station_name,
+            station_name: station.station_name,  // 추가
+            addr: station.addr,  // 추가
             isCurrentLocation: false,
           });
         });
@@ -91,7 +93,7 @@ export function GetCharge() {
             isLoading: false,
           }));
 
-          // 현재 위치 마커 즉시 표시
+          // 현재 위치에 마커 표시
           setMarkers([
             {
               position: { lat, lng },
@@ -117,7 +119,7 @@ export function GetCharge() {
     }
   }, []);
 
-  // 지도가 준비되고 현재 위치를 알 때 초기 충전소 데이터 불러오기
+  // 지도를 블러오고 현재 위치를 알 때 초기 충전소 데이터 불러오기
   useEffect(() => {
     if (map && currentLocation) {
       loadChargeStations(
@@ -192,21 +194,28 @@ export function GetCharge() {
                     size: { width: 40, height: 40 },
                   }
               }
-            >
-              {info && info.content === marker.content && (
-                <div style={{ 
-                  padding: "5px", 
-                  color: "#000", 
-                  backgroundColor: "#fff", 
-                  borderRadius: "5px",
-                  fontSize: "12px",
-                  whiteSpace: "nowrap"
-                }}>
-                  {marker.content}
+            />
+            ))}
+              
+            {info && !info.isCurrentLocation && (
+            <CustomOverlayMap position={info.position} yAnchor={1.7}>
+              <div className="bg-white rounded-lg shadow-lg p-4 min-w-[200px]">
+                <div className="flex justify-between items-center mb-2 border-b pb-2">
+                  <div className="font-bold text-sm">{info.station_name}</div>
+                  <button
+                    className="text-gray-500 hover:text-gray-700 text-xl leading-none"
+                    onClick={() => setInfo(null)}
+                    title="닫기"
+                  >
+                    ×
+                  </button>
                 </div>
-              )}
-            </MapMarker>
-          ))}
+                <div className="text-xs text-gray-600">
+                  <div className="mb-2">{info.addr}</div>
+                </div>
+              </div>
+            </CustomOverlayMap>
+          )}
         </Map>
       </section>
 
