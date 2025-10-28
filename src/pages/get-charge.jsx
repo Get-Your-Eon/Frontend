@@ -138,6 +138,9 @@ export function GetCharge() {
       const level = map.getLevel();
       const center = map.getCenter();
       const radius = getRadiusFromLevel(level);
+
+      const moveLatLon = new kakao.maps.LatLng(currentLocation.lat, currentLocation.lng);
+      map.panTo(moveLatLon);
       
       loadChargeStations(
         center.getLat(), 
