@@ -2,6 +2,7 @@ import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk"
 import { Footer } from "@/widgets/layout";
 import { useEffect, useState } from "react";
 import { fetchChargeStations } from "@/api/apis";
+import { CurrentLocationButton } from "@/widgets/ui/current-location-btn";
 
 export function GetCharge() {
   const [state, setState] = useState({
@@ -164,6 +165,14 @@ export function GetCharge() {
     };
   }, [map, currentLocation]);
 
+  // 현재 위치로 지도 중심 이동
+  const moveToCurrentLocation = () => {
+    if (map && currentLocation) {
+      const moveLatLon = new kakao.maps.LatLng(currentLocation.lat, currentLocation.lng);
+      map.panTo(moveLatLon);
+    }
+  }
+
   return (
     <>
       <section className="relative block h-[20vh]">
@@ -171,13 +180,13 @@ export function GetCharge() {
         <div className="absolute top-0 h-full w-full bg-cover bg-center"/>
       </section>
 
-      <section>
+      <section className="relative">
         <Map
           id="map"
           center={state.center}
           style={{
             width: "100%",
-            height: "700px",
+            height: "800px"
           }}
           level={7}
           onCreate={setMap}
@@ -195,7 +204,7 @@ export function GetCharge() {
                     }
                   : {
                     src: "/img/eon.png",
-                    size: { width: 40, height: 40 },
+                    size: { width: 35, height: 35 },
                   }
               }
             />
@@ -236,6 +245,10 @@ export function GetCharge() {
               </div>
             </CustomOverlayMap>
           )}
+
+          <div className="absolute bottom-6 right-6 z-20">
+            <CurrentLocationButton onClick={moveToCurrentLocation} />
+          </div>
         </Map>
       </section>
 
