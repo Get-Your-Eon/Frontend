@@ -47,6 +47,7 @@ export function Navbar({ brandName, routes, action }) {
               to={path}
               target={target}
               className="flex items-center gap-1 p-1 font-bold"
+              onClick={() => setOpenNav(false)}
             >
               {icon &&
                 React.createElement(icon, {
