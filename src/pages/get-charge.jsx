@@ -133,15 +133,16 @@ export function GetCharge() {
     }
   }, [map, currentLocation]);
 
-  // 줌 레벨 변경 감지
+  // 줌, 드레그 감지
   useEffect(() => {
     if (!map || !currentLocation) return;
 
-    const handleZoomChanged = () => {
+    const handleMapChange = () => {
       const level = map.getLevel();
       const center = map.getCenter();
       const radius = getRadiusFromLevel(level);
 
+      // 현재 위치로 지도 중심 이동
       // const moveLatLon = new kakao.maps.LatLng(currentLocation.lat, currentLocation.lng);
       // map.panTo(moveLatLon);
       
@@ -154,10 +155,12 @@ export function GetCharge() {
       );
     };
 
-    kakao.maps.event.addListener(map, 'zoom_changed', handleZoomChanged);
+    kakao.maps.event.addListener(map, 'zoom_changed', handleMapChange);
+    kakao.maps.event.addListener(map, 'dragend', handleMapChange);
 
     return () => {
-      kakao.maps.event.removeListener(map, 'zoom_changed', handleZoomChanged);
+      kakao.maps.event.removeListener(map, 'zoom_changed', handleMapChange);
+      kakao.maps.event.addListener(map, 'dragend', handleMapChange);
     };
   }, [map, currentLocation]);
 
