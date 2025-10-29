@@ -142,8 +142,8 @@ export function GetCharge() {
       const center = map.getCenter();
       const radius = getRadiusFromLevel(level);
 
-      const moveLatLon = new kakao.maps.LatLng(currentLocation.lat, currentLocation.lng);
-      map.panTo(moveLatLon);
+      // const moveLatLon = new kakao.maps.LatLng(currentLocation.lat, currentLocation.lng);
+      // map.panTo(moveLatLon);
       
       loadChargeStations(
         center.getLat(), 
@@ -222,7 +222,12 @@ export function GetCharge() {
                   충전현황
                 </div>
                 <div className="text-sm text-gray-600">
-                  <p>전체 {info.total_charger}대 중 <span className="text-eon-light font-bold">{info.available_charger}대</span> 사용 가능</p>
+                  {info.total_charger > 0 && info.available_charger > 0 ? (
+                    <p>전체 {info.total_charger}대 중 <span className="text-eon-light font-bold">{info.available_charger}대</span> 사용 가능</p>
+                  )
+                  : (
+                    <p>충전현황 정보가 없습니다.</p>
+                  )}
                   <p className="text-xs text-gray-600 mt-2">*제공처의 충전기 정보 업데이트 시간차이로 실제와 다를 수 있습니다.<span className="text-eon-dark"> <a href="https://en-ter.co.kr/main.do" target="_blank">에너지마켓플레이스 제공</a></span></p>
                 </div>
               </div>
