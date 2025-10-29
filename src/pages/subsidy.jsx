@@ -131,7 +131,7 @@ export function Subsidy() {
                   <button 
                     type="button" 
                     onClick={handleSearch}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300 transform hover:scale-105"
+                    className="w-full bg-eon-light hover:bg-eon-dark text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300 transform hover:scale-105"
                   >
                     보조금 조회
                   </button>

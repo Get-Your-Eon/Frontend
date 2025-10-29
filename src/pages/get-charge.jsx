@@ -53,14 +53,15 @@ export function GetCharge() {
               lng: station.lon,
             },
             content: station.addr + "\n" + station.station_name,
-            station_name: station.station_name,  // 추가
-            addr: station.addr,  // 추가
+            station_name: station.station_name,
+            addr: station.addr,
+            total_charger: station.total_chargers,
+            available_charger: station.available_chargers,
             isCurrentLocation: false,
           });
         });
       }
 
-      console.log('마커 개수:', newMarkers.length);
       setMarkers(newMarkers);
     } catch (error) {
       console.error("충전소 데이터를 가져오는데 실패했습니다:", error);
@@ -198,10 +199,10 @@ export function GetCharge() {
             ))}
               
             {info && !info.isCurrentLocation && (
-            <CustomOverlayMap position={info.position} yAnchor={1.7}>
+            <CustomOverlayMap position={info.position} yAnchor={1.2}>
               <div className="bg-white rounded-lg shadow-lg p-4 min-w-[200px]">
                 <div className="flex justify-between items-center mb-2 border-b pb-2">
-                  <div className="font-bold text-sm">{info.station_name}</div>
+                  <div className="font-semibold mb-1 mt-1">실시간 충전현황</div>
                   <button
                     className="text-gray-500 hover:text-gray-700 text-xl leading-none"
                     onClick={() => setInfo(null)}
@@ -210,8 +211,19 @@ export function GetCharge() {
                     ×
                   </button>
                 </div>
-                <div className="text-xs text-gray-600">
-                  <div className="mb-2">{info.addr}</div>
+                <div className="font-bold text-sm">
+                  주소
+                </div>
+                <div className="text-sm text-gray-600">
+                  <p>{info.station_name}</p>
+                  <p className="mb-2">{info.addr}</p>
+                </div>
+                <div className="font-bold text-sm mt-4">
+                  충전현황
+                </div>
+                <div className="text-sm text-gray-600">
+                  <p>전체 {info.total_charger}대 중 <span className="text-eon-light font-bold">{info.available_charger}대</span> 사용 가능</p>
+                  <p className="text-xs text-gray-600 mt-2">*제공처의 충전기 정보 업데이트 시간차이로 실제와 다를 수 있습니다.<span className="text-eon-dark"> <a href="https://en-ter.co.kr/main.do" target="_blank">에너지마켓플레이스 제공</a></span></p>
                 </div>
               </div>
             </CustomOverlayMap>
