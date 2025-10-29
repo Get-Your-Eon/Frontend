@@ -10,32 +10,60 @@ export function Subsidy() {
   const [selectedSido, setSelectedSido] = useState('');
   const [selectedSigungu, setSelectedSigungu] = useState('');
   const [carImageSrc, setCarImageSrc] = useState(carImage);
-
   const [subsidyResults, setSubsidyResults] = useState([]);
+
+  // 에러 상태 추가
+  const [errors, setErrors] = useState({
+    sido: false,
+    sigungu: false,
+    manufacturer: false,
+    model: false
+  });
+
+  const handleSidoChange = (e) => {
+    setSelectedSido(e.target.value);
+    setSelectedSigungu(''); // 시/군/구 초기화
+    setErrors(prev => ({ ...prev, sido: false, sigungu: false }));
+  };
+
+  const handleSigunguChange = (e) => {
+    setSelectedSigungu(e.target.value);
+    setErrors(prev => ({ ...prev, sigungu: false }));
+  };
 
   const handleManufacturerChange = (e) => {
     const manufacturerId = e.target.value;
     setSelectedManufacturer(manufacturerId);
     setSelectedModel(''); // 모델명 초기화
     setCarImageSrc(carImage); // 제조사 변경하면 default 이미지로 초기화
+    setErrors(prev => ({ ...prev, manufacturer: false, model: false }));
   };
 
   const handleModelChange = (e) => {
     setSelectedModel(e.target.value);
-  };
-
-  const handleSidoChange = (e) => {
-    setSelectedSido(e.target.value);
-    setSelectedSigungu(''); // 시/군/구 초기화
-  };
-
-  const handleSigunguChange = (e) => {
-    setSelectedSigungu(e.target.value);
+    setErrors(prev => ({ ...prev, model: false }));
   };
 
   const handleSearch = async () => {
-    if (!selectedSido || !selectedSigungu || !selectedManufacturer || !selectedModel) {
-      alert('시/도, 시/군/구, 제조사, 모델을 모두 선택해주세요.');
+    // 에러 상태 초기화
+    const newErrors = {
+      sido: !selectedSido,
+      sigungu: !selectedSigungu,
+      manufacturer: !selectedManufacturer,
+      model: !selectedModel
+    };
+
+    setErrors(newErrors);
+
+    // 하나라도 에러가 있으면 return
+    if (Object.values(newErrors).some(error => error)) {
+      const missingFields = [];
+      if (newErrors.sido) missingFields.push('시/도');
+      if (newErrors.sigungu) missingFields.push('시/군/구');
+      if (newErrors.manufacturer) missingFields.push('제조사');
+      if (newErrors.model) missingFields.push('모델');
+      
+      alert(`다음 항목을 선택해주세요: ${missingFields.join(', ')}`);
       return;
     }
 
@@ -74,7 +102,11 @@ export function Subsidy() {
                 
                 <div className="space-y-4">
                   <select 
-                    className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white ${
+                      errors.sido 
+                        ? 'border-red-500 ring-2 ring-red-200' 
+                        : 'border-blue-gray-200'
+                    }`}
                     value={selectedSido}
                     onChange={handleSidoChange}
                   >
@@ -83,7 +115,11 @@ export function Subsidy() {
                   </select>
 
                   <select 
-                    className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white ${
+                      errors.sigungu 
+                        ? 'border-red-500 ring-2 ring-red-200' 
+                        : 'border-blue-gray-200'
+                    }`}
                     value={selectedSigungu}
                     onChange={handleSigunguChange}
                   >
@@ -94,7 +130,11 @@ export function Subsidy() {
                   </select>
 
                   <select 
-                    className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white ${
+                      errors.manufacturer 
+                        ? 'border-red-500 ring-2 ring-red-200' 
+                        : 'border-blue-gray-200'
+                    }`}
                     value={selectedManufacturer}
                     onChange={handleManufacturerChange}
                   >
@@ -113,7 +153,11 @@ export function Subsidy() {
                   </select>
 
                   <select 
-                    className="w-full px-4 py-3 border border-blue-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white disabled:bg-blue-gray-50 disabled:text-blue-gray-400"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-blue-gray-700 bg-white disabled:bg-blue-gray-50 disabled:text-blue-gray-400 ${
+                      errors.model 
+                        ? 'border-red-500 ring-2 ring-red-200' 
+                        : 'border-blue-gray-200'
+                    }`}
                     value={selectedModel}
                     onChange={handleModelChange}
                     disabled={!selectedManufacturer}
