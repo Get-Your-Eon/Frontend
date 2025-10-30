@@ -7,8 +7,8 @@ import { CurrentLocationButton } from "@/widgets/ui/current-location-btn";
 export function GetCharge() {
   const [state, setState] = useState({
     center: { 
-      lat: 33.450701, 
-      lng: 126.570667 
+      lat: 37.420020794, 
+      lng: 127.126586284,
     },
     errMsg: null,
     isLoading: true,
