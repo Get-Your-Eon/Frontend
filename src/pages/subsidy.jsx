@@ -235,8 +235,34 @@ export function Subsidy() {
                             </div>
                           </div>
                         </div>
+                        <div className="mt-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border-2 border-orange-200">
+                          <div className="text-center">
+                            <h5 className="text-lg font-bold text-orange-700 mb-3">💰 실제 구매가격</h5>
+                            <div className="bg-white rounded-lg p-4 shadow-sm">
+                              <div className="text-sm text-blue-gray-600 mb-2">
+                                <span className="font-medium">차량 정가</span>
+                                <span className="mx-2">-</span>
+                                <span className="font-medium">총 보조금</span>
+                                <span className="mx-2">=</span>
+                                <span className="font-medium text-orange-600">실제 구매가격</span>
+                              </div>
+                              <div className="text-lg font-mono">
+                                <span className="text-blue-gray-700">{result.salePrice?.toLocaleString()}만원</span>
+                                <span className="mx-2 text-blue-gray-500">-</span>
+                                <span className="text-red-600">{(result.subsidy_total * 10000)?.toLocaleString()}만원</span>
+                                <span className="mx-2 text-blue-gray-500">=</span>
+                                <span className="text-2xl font-bold text-orange-600">
+                                  {(result.salePrice - result.subsidy_total)?.toLocaleString()}만원
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     ))}
+                    <div className='text-sm text-blue-gray-500 text-right'>데이터 제공 : 환경부 무공해차 통합누리집<br/>
+                      *정확한 정보는 지자체에 문의해주세요
+                    </div>
                   </div>
                 )}
               </div>
