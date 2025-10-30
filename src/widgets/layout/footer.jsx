@@ -106,13 +106,13 @@ Footer.defaultProps = {
   ],
   menus: [
     {
-      name: "useful links",
+      name: "이용약관",
       items: [
-        { name: "About Us", path: "https://github.com/orgs/Get-Your-Eon/repositories" },
+        { name: "개인정보 처리방침" },
         // { name: "Blog", path: "https://www.creative-tim.com/blog" },
         {
-          name: "Github",
-          path: "https://github.com/orgs/Get-Your-Eon/repositories",
+          name: "이메일무단수집거부",
+          // path: "https://github.com/orgs/Get-Your-Eon/repositories",
         },
         // {
         //   name: "Free Products",
@@ -121,7 +121,7 @@ Footer.defaultProps = {
       ],
     },
     {
-      name: "other resources",
+      name: "고객센터",
       items: [
         // {
         //   name: "MIT License",
@@ -137,22 +137,22 @@ Footer.defaultProps = {
         // },
         {
           name: "Contact Us",
-          path: "https://github.com/orgs/Get-Your-Eon/repositories",
+          path: "https://trello.com/c/tI0xBAzu",
         },
       ],
     },
   ],
   copyright: (
     <>
-      Copyright © {year} EON 전기차 토탈 관리 플랫폼 by{" "}
-      <a
+      Copyright © {year} EON All rights reserved.{" "}
+      {/* <a
         href="https://github.com/orgs/Get-Your-Eon/repositories"
         target="_blank"
         className="text-blue-gray-500 transition-colors hover:text-blue-500"
       >
         TEAM EON
       </a>
-      .
+      . */}
     </>
   ),
 };
