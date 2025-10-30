@@ -137,7 +137,7 @@ Footer.defaultProps = {
         // },
         {
           name: "Contact Us",
-          path: "https://trello.com/c/tI0xBAzu",
+          path: "https://discord.com/channels/1408060888027758764/1433490640515239967",
         },
       ],
     },

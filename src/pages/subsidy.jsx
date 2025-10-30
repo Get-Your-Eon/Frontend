@@ -236,7 +236,7 @@ export function Subsidy() {
                           </div>
                         </div>
                         <div className="mt-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border-2 border-orange-200">
-                          <div className="text-center">
+                          {result.salePrice ? (<div className="text-center">
                             <h5 className="text-lg font-bold text-orange-700 mb-3">💰 실제 구매가격</h5>
                             <div className="bg-white rounded-lg p-4 shadow-sm">
                               <div className="text-sm text-blue-gray-600 mb-2">
@@ -256,7 +256,11 @@ export function Subsidy() {
                                 </span>
                               </div>
                             </div>
-                          </div>
+                          </div>) : (
+                            <div className="text-center text-sm text-blue-gray-500">
+                              수집된 정보가 없습니다.
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
