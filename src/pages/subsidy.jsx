@@ -247,9 +247,9 @@ export function Subsidy() {
                                 <span className="font-medium text-orange-600">실제 구매가격</span>
                               </div>
                               <div className="text-lg font-mono">
-                                <span className="text-blue-gray-700">{result.salePrice?.toLocaleString()}만원</span>
+                                <span className="text-blue-gray-700">{result.salePrice.toLocaleString()}만원</span>
                                 <span className="mx-2 text-blue-gray-500">-</span>
-                                <span className="text-red-600">{(result.subsidy_total * 10000)?.toLocaleString()}만원</span>
+                                <span className="text-red-600">{result.subsidy_total.toLocaleString()}만원</span>
                                 <span className="mx-2 text-blue-gray-500">=</span>
                                 <span className="text-2xl font-bold text-orange-600">
                                   {(result.salePrice - result.subsidy_total)?.toLocaleString()}만원
