@@ -4,6 +4,7 @@ import {
   CardBody,
   CardHeader,
   Typography,
+  Carousel
 } from "@material-tailwind/react";
 import { FingerPrintIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
@@ -30,6 +31,36 @@ export function Home() {
                 전기차 구입부터 관리, 운행까지<br/>
                 전 과정을 웹 하나로, 켜는 순간 시작되는 EON 라이프
               </Typography>
+
+              {/* Car Image Carousel */}
+              <div className="mt-12 w-full max-w-4xl mx-auto">
+                <Carousel
+                  className="rounded-xl"
+                  autoplay={true}
+                  autoplayDelay={3000}
+                  loop={false}
+                  prevArrow={false}
+                  nextArrow={false}
+                  navigation={false}
+                  data-carousel="slide"
+                >
+                  <img
+                    src="/img/slide1.webp"
+                    alt="Electric Vehicle 1"
+                    className="h-full w-full object-cover"
+                  />
+                  <img
+                    src="/img/slide2.webp"
+                    alt="Electric Vehicle 2"
+                    className="h-full w-full object-cover"
+                  />
+                  <img
+                    src="/img/slide3.webp"
+                    alt="Electric Vehicle 3"
+                    className="h-full w-full object-cover"
+                  />
+                </Carousel>
+              </div>
             </div>
           </div>
         </div>
@@ -97,6 +128,13 @@ export function Home() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="relative bg-white px-4">
+          <img 
+            src="/img/main1.webp" 
+            alt="Description" 
+            className="mx-auto max-w-full h-auto"
+          />
       </section>
       {/* <section className="px-4 pt-20 pb-48">
         <div className="container mx-auto">
@@ -214,6 +252,13 @@ export function Home() {
             </Button>
           </form> */}
         </div>
+      </section>
+      <section className="relative bg-white px-4">
+          <img 
+            src="/img/main2.webp" 
+            alt="Description" 
+            className="mx-auto max-w-full h-auto"
+          />
       </section>
       <div className="bg-white">
         <Footer />
