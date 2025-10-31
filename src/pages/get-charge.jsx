@@ -194,28 +194,44 @@ export function GetCharge() {
           center={state.center}
           style={{
             width: "100%",
-            height: "800px"
+            height: "calc(100vh - 200px)",
           }}
           level={7}
           onCreate={setMap}
         >
           {markers.map((marker, index) => (
-            <MapMarker
-              key={`marker-${index}-${marker.position.lat},${marker.position.lng}`}
-              position={marker.position}
-              onClick={() => setInfo(marker)}
-              image={
-                marker.isCurrentLocation
-                  ? {
-                      src: "/img/current-location.png",
-                      size: { width: 35, height: 35 },
+            <div key={`marker-${index}-${marker.position.lat},${marker.position.lng}`}>
+              <MapMarker
+                position={marker.position}
+                onClick={() => setInfo(marker)}
+                image={
+                  marker.isCurrentLocation
+                    ? {
+                        src: "/img/current-location.png",
+                        size: { width: 35, height: 35 },
+                      }
+                    : {
+                      src: "/img/charger-location.png",
+                      size: { width: 45, height: 45 },
                     }
-                  : {
-                    src: "/img/charger-location.png",
-                    size: { width: 45, height: 45 },
-                  }
-              }
-            />
+                }
+              />
+              
+              {/* 충전소 이름 라벨 */}
+              {!marker.isCurrentLocation && marker.station_name && (
+                <CustomOverlayMap position={marker.position} yAnchor={-0.3}>
+                  {marker.available_charger > 0 ? (
+                    <div className="bg-white bg-opacity-90 rounded px-2 py-1 shadow-sm text-xs font-medium text-center min-w-max border border-eon-navy text-eon-dark font-bold">
+                      충전가능
+                    </div>
+                  ) : (
+                    <div className="bg-white bg-opacity-90 rounded px-2 py-1 shadow-sm text-xs font-medium text-center min-w-max">
+                      충전불가
+                    </div>
+                  )}
+                </CustomOverlayMap>
+              )}
+            </div>
             ))}
               
             {info && !info.isCurrentLocation && (

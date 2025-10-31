@@ -8,6 +8,7 @@ module.exports = withMT({
       colors: {
         'eon-light': '#2cdbd8',
         'eon-dark': '#29c2c8',
+        'eon-navy': '#253a7a'
       }
     },
   },

@@ -76,14 +76,14 @@ export function Navbar({ brandName, routes, action }) {
         </Link>
         <div className="hidden lg:block" style={{ color: '#000' }}>{navList}</div>
         <div className="hidden gap-2 lg:flex">
-          <a
+          {/* <a
             href="https://github.com/orgs/Get-Your-Eon/repositories"
             target="_blank"
           >
             <Button variant="text" size="sm" fullWidth style={{ color: '#000' }}>
               github
             </Button>
-          </a>
+          </a> */}
           {React.cloneElement(action, {
             className: "hidden lg:inline-block",
           })}
@@ -109,7 +109,7 @@ export function Navbar({ brandName, routes, action }) {
       >
         <div className="container mx-auto">
           {navList}
-          <a
+          {/* <a
             href="https://github.com/orgs/Get-Your-Eon/repositories"
             target="_blank"
             className="mb-2 block"
@@ -117,7 +117,7 @@ export function Navbar({ brandName, routes, action }) {
             <Button variant="text" size="sm" fullWidth>
               github
             </Button>
-          </a>
+          </a> */}
           {React.cloneElement(action, {
             className: "w-full block",
           })}
@@ -131,11 +131,11 @@ Navbar.defaultProps = {
   brandName: "EON",
   action: (
     <a
-      href=""
+      href="https://github.com/orgs/Get-Your-Eon/repositories"
       target="_blank"
     >
       <Button variant="gradient" size="sm" fullWidth>
-        QR CODE
+        GitHub
       </Button>
     </a>
   ),

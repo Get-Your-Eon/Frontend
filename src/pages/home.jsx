@@ -10,6 +10,7 @@ import { FingerPrintIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
 import { featuresData, contactData, chargeData } from "@/data";
+import { Link } from "react-router-dom";
 
 export function Home() {
   return (
@@ -23,17 +24,22 @@ export function Home() {
               <Typography
                 variant="h1"
                 color="black"
-                className="mb-6 font-black mt-24"
+                className="mb-6 font-black mt-32"
               >
                 Electric On Mobility
               </Typography>
+              <Link to="/subsidy">
+                <button className="bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-800 transition-colors">
+                  자세히 알아보기
+                </button>
+              </Link>
               {/* <Typography variant="lead" color="black" className="opacity-80">
                 전기차 구입부터 관리, 운행까지<br/>
                 전 과정을 웹 하나로, 켜는 순간 시작되는 EON 라이프
               </Typography> */}
 
               {/* Car Image Carousel */}
-              <div className="mt-12 w-full max-w-4xl mx-auto">
+              <div className="mt-10 w-full max-w-4xl mx-auto">
                 <Carousel
                   className="rounded-xl"
                   autoplay={true}
@@ -59,13 +65,28 @@ export function Home() {
                     alt="Electric Vehicle 3"
                     className="h-full w-full object-cover"
                   />
+                  <img
+                    src="/img/slide1.webp"
+                    alt="Electric Vehicle 1"
+                    className="h-full w-full object-cover"
+                  />
+                  <img
+                    src="/img/slide2.webp"
+                    alt="Electric Vehicle 2"
+                    className="h-full w-full object-cover"
+                  />
+                  <img
+                    src="/img/slide3.webp"
+                    alt="Electric Vehicle 3"
+                    className="h-full w-full object-cover"
+                  />
                 </Carousel>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section className="-mt-32 bg-white px-4 pb-20 pt-4">
+      <section className="-mt-32 bg-white px-4 pb-20 pt-20">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featuresData.map(({ color, title, icon, description }) => (
