@@ -31,4 +31,18 @@ export const fetchChargeStations = async (lat, lon, radius) => {
   return await response.json();
 };
 
+export const fetchStationChargers = async (station_id, addr) => {
+  const encodedAddress = encodeURIComponent(addr);
+  
+  const response = await fetch(`${API_BASE_URL}/api/v1/station/${station_id}/chargers?addr=${encodedAddress}`, {
+    method: 'GET',
+    headers: {
+      'X-API-KEY': API_KEY,
+      'Accept': 'application/json'
+    }
+  });
+  
+  return await response.json();
+};
+
 // string 은 인코딩해서 보내기.

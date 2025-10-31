@@ -3,6 +3,8 @@ import { Footer } from "@/widgets/layout";
 import { useEffect, useState } from "react";
 import { fetchChargeStations } from "@/api/apis";
 import { CurrentLocationButton } from "@/widgets/ui/current-location-btn";
+import { fetchStationChargers } from '../api/apis.js';
+import { ChargerList } from "@/widgets/ui/charger-list";
 
 export function GetCharge() {
   const [state, setState] = useState({
@@ -54,6 +56,7 @@ export function GetCharge() {
               lng: station.lon,
             },
             content: station.addr + "\n" + station.station_name,
+            station_id: station.station_id,
             station_name: station.station_name,
             addr: station.addr,
             total_charger: station.total_chargers,
@@ -181,6 +184,24 @@ export function GetCharge() {
     }
   }
 
+  const [chargers, setChargers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedStationId, setSelectedStationId] = useState(null);
+
+  const handleMarkerClick = async (stationId, addr) => {
+    try {
+      setLoading(true);
+      setSelectedStationId(stationId); // 선택된 스테이션 ID 설정
+      const chargersData = await fetchStationChargers(stationId, addr);
+      console.log('Chargers data:', chargersData);
+      setChargers(chargersData);
+    } catch (error) {
+      console.error('Error fetching chargers:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <section className="relative block h-[20vh]">
@@ -199,6 +220,15 @@ export function GetCharge() {
           level={7}
           onCreate={setMap}
         >
+          <div className="absolute top-6 left-6 z-20">
+            <ChargerList 
+              markers={markers}
+              onMarkerClick={handleMarkerClick}
+              chargers={chargers}
+              selectedStationId={selectedStationId}
+            />
+          </div>
+
           {markers.map((marker, index) => (
             <div key={`marker-${index}-${marker.position.lat},${marker.position.lng}`}>
               <MapMarker
@@ -264,7 +294,7 @@ export function GetCharge() {
                   : (
                     <p>충전현황 정보가 없습니다.</p>
                   )}
-                  <p className="text-xs text-gray-600 mt-2">*제공처의 충전기 정보 업데이트 시간차이로 실제와 다를 수 있습니다.<span className="text-eon-dark"> <a href="https://en-ter.co.kr/main.do" target="_blank">에너지마켓플레이스 제공</a></span></p>
+                  {/* <p className="text-xs text-gray-600 mt-2">*제공처의 충전기 정보 업데이트 시간차이로 실제와 다를 수 있습니다.<span className="text-eon-dark"> <a href="https://en-ter.co.kr/main.do" target="_blank">에너지마켓플레이스 제공</a></span></p> */}
                 </div>
               </div>
             </CustomOverlayMap>

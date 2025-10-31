@@ -1,18 +1,47 @@
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Typography, IconButton } from "@material-tailwind/react";
 
 const year = new Date().getFullYear();
 
 export function Footer({ title, description, socials, menus, copyright }) {
+  const brands = [
+    { name: '현대', url: 'https://www.hyundai.com/kr/ko/e' },
+    { name: '기아', url: 'https://www.kia.com/kr' },
+    { name: '르노', url: 'https://www.renault.co.kr/ko/main/main.jsp' },
+    { name: 'BMW', url: 'https://www.bmw.co.kr/ko/index.html' },
+    { name: '테슬라', url: 'https://www.tesla.com/ko_kr' },
+    { name: '메르세데스벤츠', url: 'https://www.mercedes-benz.co.kr/' },
+    { name: '폭스바겐', url: 'https://www.volkswagen.co.kr/ko.html' },
+    { name: 'KGM', url: 'https://www.kg-mobility.com/' },
+    { name: '폴스타', url: 'https://www.polestar.com/kr/' },
+    { name: '볼보', url: 'https://www.volvocars.com/kr/' },
+    { name: 'BYD', url: 'https://www.bydauto.kr/index' },
+  ];
+
+  const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('click', onDocClick);
+    return () => document.removeEventListener('click', onDocClick);
+  }, []);
+
   return (
-    <footer className="relative px-4 pt-8 pb-6">
+    <footer className="relative px-4 pt-8 pb-6 bg-gray-900 text-white">
       <div className="container mx-auto">
-        <div className="flex flex-wrap pt-6 text-center lg:text-left">
-          <div className="w-full px-4 lg:w-6/12">
-            <Typography variant="h4" className="mb-4" color="blue-gray">
+        <div className="flex flex-wrap items-center gap-4 pt-6 text-center lg:text-left">
+          <div className="w-full px-4 lg:w-5/12">
+            <Typography variant="h4" className="mb-4 text-white" color="white">
               {title}
             </Typography>
-            <Typography className="font-normal text-blue-gray-500 lg:w-2/5">
+            <Typography className="font-normal text-gray-300 lg:w-2/5">
               {description}
             </Typography>
             <div className="mx-auto mt-6 mb-8 flex justify-center gap-2 md:mb-0 lg:justify-start">
@@ -32,27 +61,70 @@ export function Footer({ title, description, socials, menus, copyright }) {
               ))}
             </div>
           </div>
-          <div className="mx-auto mt-12 grid w-max grid-cols-2 gap-24 lg:mt-0">
+
+          {/* 중앙 토글: EON / 이용약관 / 고객센터와 같은 라인에 위치 */}
+          <div className="flex w-auto lg:w-2/12 items-center justify-center">
+            <div className="relative flex items-center gap-3" ref={containerRef}>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setOpen((v) => !v)}
+                  className="inline-flex items-center gap-3 rounded-md border border-gray-400 bg-black px-6 py-2 text-base font-medium text-white shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  aria-expanded={open}
+                  aria-haspopup="listbox"
+                >
+                  <span className="text-sm text-white whitespace-nowrap">{selectedIndex !== null ? brands[selectedIndex]?.name : '브랜드 바로가기'}</span>
+                  <svg className={`w-4 h-4 text-white transition-transform ${open ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
+                  </svg>
+                </button>
+
+                {open && (
+                  <ul
+                    role="listbox"
+                    className="absolute left-1/2 bottom-full z-30 mb-2 w-72 -translate-x-1/2 overflow-hidden rounded-md border border-gray-700 bg-gray-700 text-white shadow-lg"
+                  >
+                    {brands.map((b, idx) => (
+                      <li
+                        key={b.name}
+                        role="option"
+                        aria-selected={selectedIndex === idx}
+                        onClick={() => { setSelectedIndex(idx); setOpen(false); }}
+                        className={`cursor-pointer px-3 py-2 ${selectedIndex === idx ? 'bg-gray-600 font-semibold' : 'hover:bg-gray-600'}`}
+                      >
+                        <span className="text-sm text-white">{b.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const b = selectedIndex !== null ? brands[selectedIndex] : null;
+                  if (b && b.url) window.open(b.url, '_blank');
+                }}
+                disabled={selectedIndex === null}
+                className={`ml-2 inline-flex h-8 min-w-[56px] items-center justify-center rounded-md bg-gray-200 text-gray-800 border border-gray-300 text-base px-3 ${selectedIndex === null ? 'opacity-50 pointer-events-none' : 'hover:bg-gray-300'}`}
+                aria-label="Open selected brand"
+                aria-disabled={selectedIndex === null}
+              >
+                <span className="font-medium">--&gt;</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-0 grid w-max grid-cols-2 gap-24 lg:mt-0 lg:mx-0 lg:w-auto lg:ml-8">
             {menus.map(({ name, items }) => (
               <div key={name}>
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 block font-medium uppercase"
-                >
+                <Typography variant="small" color="gray" className="mb-2 block font-medium uppercase text-gray-300">
                   {name}
                 </Typography>
                 <ul className="mt-3">
                   {items.map((item) => (
                     <li key={item.name}>
-                      <Typography
-                        as="a"
-                        href={item.path}
-                        target="_blank"
-                        rel="noreferrer"
-                        variant="small"
-                        className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
-                      >
+                      <Typography as="a" href={item.path} target="_blank" rel="noreferrer" variant="small" className="mb-2 block font-normal text-gray-300 hover:text-white">
                         {item.name}
                       </Typography>
                     </li>
@@ -62,13 +134,12 @@ export function Footer({ title, description, socials, menus, copyright }) {
             ))}
           </div>
         </div>
-        <hr className="my-6 border-gray-300" />
-        <div className="flex flex-wrap items-center justify-center md:justify-between">
+
+        <hr className="my-6 border-gray-700" />
+
+        <div className="flex flex-wrap items-center justify-center md:justify-between bg-black py-4">
           <div className="mx-auto w-full px-4 text-center">
-            <Typography
-              variant="small"
-              className="font-normal text-blue-gray-500"
-            >
+            <Typography variant="small" className="font-normal text-gray-400">
               {copyright}
             </Typography>
           </div>
