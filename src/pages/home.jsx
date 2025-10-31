@@ -23,14 +23,14 @@ export function Home() {
               <Typography
                 variant="h1"
                 color="black"
-                className="mb-6 font-black"
+                className="mb-6 font-black mt-24"
               >
                 Electric On Mobility
               </Typography>
-              <Typography variant="lead" color="black" className="opacity-80">
+              {/* <Typography variant="lead" color="black" className="opacity-80">
                 전기차 구입부터 관리, 운행까지<br/>
                 전 과정을 웹 하나로, 켜는 순간 시작되는 EON 라이프
-              </Typography>
+              </Typography> */}
 
               {/* Car Image Carousel */}
               <div className="mt-12 w-full max-w-4xl mx-auto">
