@@ -24,7 +24,7 @@ export function Home() {
               <Typography
                 variant="h1"
                 color="black"
-                className="mb-6 font-black mt-32"
+                className="mb-20 font-black mt-56"
               >
                 Electric On Mobility
               </Typography>
@@ -86,7 +86,7 @@ export function Home() {
           </div>
         </div>
       </div>
-      <section className="-mt-32 bg-white px-4 pb-20 pt-20">
+      <section className="-mt-35 bg-white px-4 pb-20 pt-20">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featuresData.map(({ color, title, icon, description }) => (

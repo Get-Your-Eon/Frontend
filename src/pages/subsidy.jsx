@@ -265,7 +265,9 @@ export function Subsidy() {
                       </div>
                     ))}
                     <div className='text-sm text-blue-gray-500 text-right'>데이터 제공 : 환경부 무공해차 통합누리집<br/>
-                      *정확한 정보는 지자체에 문의해주세요
+                      *정확한 정보는 지자체에 문의해주세요<br/>
+                      데이터 제공 : 차량 브랜드 홈페이지<br/>
+                      *정확한 정보는 제조사에 문의해주세요
                     </div>
                   </div>
                 )}
